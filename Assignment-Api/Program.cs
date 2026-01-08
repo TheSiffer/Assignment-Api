@@ -1,4 +1,6 @@
 using Assignment_Api.Data;
+using Assignment_Api.Interfaces;
+using Assignment_Api.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddScoped<IUserService, UserService>(); //register services for DI
+builder.Services.AddScoped<IOtpService, OtpService>();
 
 var app = builder.Build();
 
